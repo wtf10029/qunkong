@@ -1,0 +1,209 @@
+{extend name="pub/extend" /}
+
+{block name="title"}
+    <title>图片管理 - 图片列表</title>
+{/block}
+
+{block name="link"}
+    <!--dynamic table-->
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/js/data-tables/DT_bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/my.css" />
+
+    <!--multi-select-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/js/jquery-multi-select/css/multi-select.css" />
+
+    <!--file upload-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/bootstrap-fileupload.min.css" />
+
+    <!--tags input-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/js/jquery-tags-input/jquery.tagsinput.css" />
+{/block}
+
+{block name="bread"}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{:url('admin/Index/index')}">首页</a>
+        </li>
+        <li class="active">图片列表</li>
+    </ul>
+{/block}
+
+{block name="content"}
+   <div class="row">
+       <div class="col-sm-12">
+           <section class="panel">
+               <header class="panel-heading">
+                    全部图片
+                   <span class="tools pull-right">
+                       <a href="javascript:;" class="fa fa-chevron-down"></a>
+                       <a href="javascript:;" class="fa fa-times"></a>
+                    </span>
+               </header>
+               <div class="panel-body">
+
+                   <ul class="media-filter">
+                        <li><a href="{:url('Image/show')}">全部</a></li>
+                        {volist name="classify" id="vo"}
+                            <li><a href="{:url('Image/classify',array('cl' => $vo['id']))}" data-filter=".images">{$vo.catename}</a></li>
+                        {/volist}
+                   </ul>
+
+                   <div id="gallery" class="media-gal">
+                        {volist name="image" id="vo"}
+                            <div class="images item " onclick="edit({$vo.id})">
+                               <a href="#myModal" data-toggle="modal">
+                                   <img src="__IMAGE__/{$vo.lst_img}" alt="" />
+                               </a>
+                               <p>{$vo.name}</p>
+                                <div class="del" style="width:100%;height:30px;background-color:#ccc;padding-left:60px;">
+                                <a href="#myModal" data-toggle="modal" class="btn btn-success btn-sm">编辑</a>&nbsp;&nbsp;&nbsp;
+                                <a href="{:url('Image/del',array('id' => $vo['id']))}" class="btn btn-danger btn-sm">删除</a>
+                                </div>
+                            </div>
+                        {/volist}
+                   </div>
+
+                   <!-- Modal -->
+                   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                       <div class="modal-dialog">
+                           <div class="modal-content">
+                               <div class="modal-header">
+                                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                   <h4 class="modal-title">编辑图片</h4>
+                               </div>
+
+                               <div class="modal-body row">
+
+                                   <div class="col-md-5 img-modal">
+                                       <img id="img" src="__PUBLIC__/images/white.jpg" alt="">
+                                       <p class="mtop10"><strong>图片名:</strong><span id="img_name">image1.jpg</span></p>
+                                       <p><strong>图片格式:</strong> <span id="img_type">jpg</span></p>
+                                       <p><strong>图片尺寸:</strong> <span id="img_size">300x200</span></p>
+                                       <p><strong>创建时间:</strong> <span id="createtime">2016年6月6日 06:06</span></p>
+                                   </div>
+                                   <div class="col-md-7">
+                                        <form action="{:url('Image/edit')}" method="post" enctype="multipart/form-data">
+                                            <input type="hidden" id="hidden" name="id" value="">
+                                            <div class="form-group">
+                                               <label>图片分类</label>
+                                               <input id="class" name="class" value="分类" class="form-control" title="分类不可修改" Disabled>
+                                            </div>
+                                            <div class="form-group">
+                                               <label>图片标题</label>
+                                               <input id="title" name="title" value="标题" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                               <label>图片描述</label>
+                                               <textarea id="description" name="description" rows="2" class="form-control"></textarea>
+                                            </div>
+                                            <div class="form-group last">
+                                                <label class="control-label">修改图片</label>
+                                                <div>
+                                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                                            <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="">
+                                                        </div>
+                                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                                        <div>
+                                                               <span class="btn btn-default btn-file">
+                                                               <span class="fileupload-new"><i class="fa fa-paper-clip"></i>图片添加</span>
+                                                               <span class="fileupload-exists"><i class="fa fa-undo"></i> 修改</span>
+                                                               <input type="file" name="image" class="default">
+                                                               </span>
+                                                            <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i>移除</a>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                            <div class="pull-right">
+                                               <button class="btn btn-success btn-sm" type="submit">保存更改</button>
+                                            </div>
+                                       </form>
+                                   </div>
+
+                               </div>
+
+                           </div>
+                       </div>
+                   </div>
+                   <!-- modal -->
+
+               </div>
+           </section>
+       </div>
+   </div>
+{/block}
+
+{block name="js"}
+    <script src="__PUBLIC__/js/jquery.isotope.js"></script>
+    <!--ios7-->
+    <script src="__PUBLIC__/js/ios-switch/switchery.js" ></script>
+    <script src="__PUBLIC__/js/ios-switch/ios-init.js" ></script>
+
+    <!--icheck -->
+    <script src="__PUBLIC__/js/iCheck/jquery.icheck.js"></script>
+    <script src="__PUBLIC__/js/icheck-init.js"></script>
+    <!--multi-select-->
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-multi-select/js/jquery.multi-select.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+    <script src="__PUBLIC__/js/multi-select-init.js"></script>
+    <!--spinner-->
+    <script type="text/javascript" src="__PUBLIC__/js/fuelux/js/spinner.min.js"></script>
+    <script src="__PUBLIC__/js/spinner-init.js"></script>
+    <!--file upload-->
+    <script type="text/javascript" src="__PUBLIC__/js/bootstrap-fileupload.min.js"></script>
+    <!--tags input-->
+    <script src="__PUBLIC__/js/jquery-tags-input/jquery.tagsinput.js"></script>
+    <script src="__PUBLIC__/js/tagsinput-init.js"></script>
+    <!--bootstrap input mask-->
+    <script type="text/javascript" src="__PUBLIC__/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            var $container = $('#gallery');
+            $container.isotope({
+                itemSelector: '.item',
+                animationOptions: {
+                    duration: 750,
+                    easing: 'linear',
+                    queue: false
+                }
+            });
+
+            // filter items when filter link is clicked
+            $('#filters a').click(function() {
+                var selector = $(this).attr('data-filter');
+                $container.isotope({filter: selector});
+                return false;
+            });
+        });
+
+        function edit(id){
+            $.ajax({
+                type:'get',
+                url:"{:url('Image/edit')}",
+                data:{'id':id},
+                dataType:'json',
+                success:function(data){
+                    $('#img').attr('src','__IMAGE__/'+data.txt.thumb_img);
+                    $('#img_name').text(data.txt.name);
+                    $('#img_type').text(data.txt.type);
+                    $('#img_size').text(data.txt.size);
+                    $('#createtime').text(getLocalTime(data.txt.createtime));
+                    $('#title').attr('value',data.txt.title);
+                    $('#description').text(data.txt.description);
+                    $('#class').attr('value',data.txt.classify);
+                    $('#hidden').attr('value',data.txt.id);
+                }
+            })
+        }
+
+        function getLocalTime(nS) {
+            return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+        }
+
+    </script>
+{/block}

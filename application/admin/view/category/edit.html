@@ -1,0 +1,147 @@
+{extend name="pub/extend" /}
+
+{block name="title"}
+    <title>栏目管理 - 编辑栏目</title>
+{/block}
+
+{block name="link"}
+    <!--ios7-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/js/ios-switch/switchery.css" />
+
+    <!--icheck-->
+    <link href="__PUBLIC__/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
+    <link href="__PUBLIC__/js/iCheck/skins/minimal/red.css" rel="stylesheet">
+    <link href="__PUBLIC__/js/iCheck/skins/minimal/blue.css" rel="stylesheet">
+    <link href="__PUBLIC__/js/iCheck/skins/square/red.css" rel="stylesheet">
+    <link href="__PUBLIC__/js/iCheck/skins/square/blue.css" rel="stylesheet">
+    <link href="__PUBLIC__/js/iCheck/skins/flat/red.css" rel="stylesheet">
+    <link href="__PUBLIC__/js/iCheck/skins/flat/blue.css" rel="stylesheet">
+
+    <!--multi-select-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/js/jquery-multi-select/css/multi-select.css" />
+
+    <!--file upload-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/bootstrap-fileupload.min.css" />
+
+    <!--tags input-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/js/jquery-tags-input/jquery.tagsinput.css" />
+{/block}
+
+{block name="bread"}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{:url('admin/Index/index')}">首页</a>
+        </li>
+        <li class="active">编辑栏目</li>
+    </ul>
+{/block}
+
+{block name="content"}
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    编辑栏目
+                </header>
+                <div class="panel-body">
+                    <div class=" form">
+                        <form class="cmxform form-horizontal adminex-form" id="commentForm" method="post" action="{:url('Category/edit',array('id' => $cateres['id']))}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">上级栏目&nbsp;(必填*)</label>
+                                <div class="col-lg-10">
+                                    <select class="form-control m-bot15" name="pid">
+                                        <option value="0">顶级栏目</option>
+                                        {volist name="category" id="vo"}
+                                        {if condition="$vo['id'] eq $cateres['pid']"}
+                                            <option value="{$vo.id}" selected="selected">
+                                                {if condition="$vo.level neq 0"}|{/if}
+                                                <?php echo str_repeat('----',$vo['level'])?>
+                                                {$vo.catename}
+                                            </option>
+                                        {else /}
+                                            <option value="{$vo.id}">
+                                                {if condition="$vo.level neq 0"}|{/if}
+                                                <?php echo str_repeat('----',$vo['level'])?>
+                                                {$vo.catename}
+                                            </option>
+                                        {/if}
+                                        {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="catename" class="control-label col-lg-2">栏目名称&nbsp;(必填*)</label>
+                                <div class="col-lg-10">
+                                    <input class="form-control " id="catename" type="text" name="catename" value="{$cateres.catename}" required />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">栏目类型</label>
+                                <div class="col-lg-10 icheck ">
+                                    {if condition="$cateres['type'] eq 1"}
+                                        <div class="square-blue single-row">
+                                            <div class="radio ">
+                                                <input tabindex="3" type="radio"  name="type" value="1" checked="checked">
+                                                <label>列表栏目</label>
+                                            </div>
+                                        </div>
+                                        <div class="square-red single-row">
+                                            <div class="radio ">
+                                                <input tabindex="3" type="radio"  name="type" value="2" >
+                                                <label>单页栏目</label>
+                                            </div>
+                                        </div>
+                                    {else /}
+                                        <div class="square-blue single-row">
+                                            <div class="radio ">
+                                                <input tabindex="3" type="radio"  name="type" value="1">
+                                                <label>列表栏目</label>
+                                            </div>
+                                        </div>
+                                        <div class="square-red single-row">
+                                            <div class="radio ">
+                                                <input tabindex="3" type="radio"  name="type" value="2" checked="checked">
+                                                <label>单页栏目</label>
+                                            </div>
+                                        </div>
+                                    {/if}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button class="btn btn-primary" type="submit">保存栏目</button>
+                                    <button class="btn btn-default" type="reset">重新填写</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </div>
+{/block}
+
+{block name="js"}
+    <!--ios7-->
+    <script src="__PUBLIC__/js/ios-switch/switchery.js" ></script>
+    <script src="__PUBLIC__/js/ios-switch/ios-init.js" ></script>
+
+    <!--icheck -->
+    <script src="__PUBLIC__/js/iCheck/jquery.icheck.js"></script>
+    <script src="__PUBLIC__/js/icheck-init.js"></script>
+    <!--multi-select-->
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-multi-select/js/jquery.multi-select.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+    <script src="__PUBLIC__/js/multi-select-init.js"></script>
+    <!--spinner-->
+    <script type="text/javascript" src="__PUBLIC__/js/fuelux/js/spinner.min.js"></script>
+    <script src="__PUBLIC__/js/spinner-init.js"></script>
+    <!--file upload-->
+    <script type="text/javascript" src="__PUBLIC__/js/bootstrap-fileupload.min.js"></script>
+    <!--tags input-->
+    <script src="__PUBLIC__/js/jquery-tags-input/jquery.tagsinput.js"></script>
+    <script src="__PUBLIC__/js/tagsinput-init.js"></script>
+    <!--bootstrap input mask-->
+    <script type="text/javascript" src="__PUBLIC__/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+{/block}

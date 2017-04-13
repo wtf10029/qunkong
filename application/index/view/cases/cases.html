@@ -1,0 +1,98 @@
+{extend name="layouts/blank" /} {block name="title"} 群控 -案例 {/block} {block name="link"} {/block} {block name="content"}
+<div class="n-banner" style="background: url(__PUBLIC__/images/detailbj.jpg);"></div>
+<div class="warpcase">
+	<div class="w1200" style="overflow: hidden;">
+		<div class="main-title" style="background:url(__PUBLIC__/images/bj.png) no-repeat center center">
+			<p>客户案例</p>
+		</div>
+		<div class="warpcase-content clear">
+			<div class="left ani-view fade-in-left">
+				<img src="__IMAGE__/{{view.focus.thumbnail}}" class="lazy">
+			</div>
+			<div class="right ani-view fade-in-right news">
+				<span>{{view.focus.title}}</span>
+
+				<p>{{view.focus.description}}
+					<br>[<a href="detail.html?id={{view.focus.id}}">查看详情</a>]
+				</p>
+				<font>{{view.focus.createtime|datatime}}</font>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="line"></div>
+<div class="warpprobox">
+	<div class="w1200" style="overflow: hidden;">
+		<div class="warpprocontent clear">
+			<ul>
+				<li v-for="c in view.cases">
+					<a href="detail.html?id={{c.id}}"><img src="__IMAGE__/{{c.thumbnail}}"></a>
+					<div class="right news-li-right">
+						<dl>
+							<dt><a href="detail.html?id={{c.id}}" class="wztitle">{{c.title}}</a></dt>
+							<dd><a href="detail.html?id={{c.id}}">{{c.description}}</a></dd>
+						</dl>
+						<span class="data">{{c.createtime|datatime}}</span>
+						<a href="detail.html?id={{c.id}}" class="readmore">查看详情 &gt;</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="pro-page visible-lg-block">
+			<ul>
+				<!--class="{{n+1 | is_active currentPage}}  判断是否是选中的状态 加上样式-->
+				<li v-for="n in view.pagenum" class="{{n+1 | is_active currentPage}}">
+					<a href="cases.html?page={{n+1}}">{{n+1}}</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+{/block} {block name="js"}
+<script type="text/javascript">
+	//时间过滤器
+	Vue.filter('datatime', function (time) {
+		var time = new Date(parseInt(time) * 1000); //获取一个时间对象  注意：如果是uinx时间戳记得乘于1000。比如php函数time()获得的时间戳就要乘于1000     
+		Y = time.getFullYear() + '-';
+		M = (time.getMonth() + 1 < 10 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1) + '-';
+		D = time.getDate() + ' ';
+		h = (time.getHours() < 10 ? '0' + time.getHours() : time.getHours()) + ':';
+		m = (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes()) + ':';
+		s = (time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds());
+		return Y + M + D;
+	})
+	//加上选中样式
+	Vue.filter('is_active', function (value, currentPage) {
+		return value == currentPage ? "pageactive" : "";
+	})
+	var vuedemo = new Vue({
+		el: "#content1",
+		data: {
+			view: {},
+			currentPage: GetQueryString("page"),//选中的样式与我page=id的id值进行匹配 达到选中的目的。
+		},
+		ready: function () {
+			$.ajax({
+				url: "{:url('index/Cases/caseLst')}",
+				type: "POST",
+				data: { page: 1, pagesize: 8 },
+				success: function (data) {
+					data = JSON.parse(data); //将字符串转换成json格式     
+					vuedemo.view = data;//将数据赋值到view对象
+					Vue.nextTick(function () {
+					});
+				},
+				error: function (data) {
+					console.log("error!");
+				}
+			})
+		}
+	})
+// js获取url的参数
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null) return unescape(r[2]); return null;
+	}
+</script>
+{/block}

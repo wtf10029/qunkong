@@ -1,0 +1,121 @@
+{extend name="pub/extend" /}
+
+{block name="title"}
+    <title>友情链接 - 链接列表</title>
+{/block}
+
+{block name="link"}
+    <!--dynamic table-->
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/js/data-tables/DT_bootstrap.css" />
+{/block}
+
+{block name="bread"}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{:url('admin/Index/index')}">首页</a>
+        </li>
+        <li class="active">链接列表</li>
+    </ul>
+{/block}
+
+{block name="content"}
+    <div class="wrapper">
+    <div class="row">
+    <div class="col-sm-12">
+    <form id="form1" name="form1" action="{:url('Link/sort')}" method="post">
+    <section class="panel">
+    <header class="panel-heading">
+        <a href="{:url('Link/add')}">
+            <button class="btn btn-sm btn-success" type="button"><i class="fa fa-plus-square"></i>&nbsp;&nbsp;添加</button>
+        </a>
+        <button class="btn btn-sm btn-primary" type="submit">
+            <i class="fa fa-sort"></i>&nbsp;&nbsp;排序
+        </button>
+        <span class="tools pull-right">
+            <a href="javascript:;" class="fa fa-chevron-down"></a>
+            <a href="javascript:;" class="fa fa-times"></a>
+        </span>
+    </header>
+    <div class="panel-body">
+    <div class="adv-table">
+    <table  class="display table table-bordered table-striped" id="dynamic-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>标题</th>
+        <th>连接</th>
+        <th>创建时间</th>
+        <th>排序</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+        {volist name="res" id="vo"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.title}</td>
+                <td>{$vo.url}</td>
+                <td>{$vo.createtime|date="Y-m-d H:i",###}</td>
+                <td width="45"><input type="test" name="{$vo.id}" value="{$vo.sort}" class="form-control"></td>
+                <td>
+                    {if condition="$vo['status'] eq 1"}
+                        <a href="javascript:void(0);" onclick="show({$vo.id},this)"><img src="__PUBLIC__/images/ok.png" style="margin-left: 10px;"></a>
+                    {else /}
+                        <a href="javascript:void(0);" onclick="show({$vo.id},this)"><img src="__PUBLIC__/images/cancel.png" style="margin-left: 10px;"></a>
+                    {/if}
+                </td>
+                <td style="text-align:center;">
+                    <a href="{:url('Link/edit',array('id'=>$vo['id']))}">
+                        <button class="btn btn-xs btn-info" type="button"><i class="fa fa-pencil"></i>&nbsp;编辑</button>
+                    </a>
+                    <a href="{:url('Link/del',array('id'=>$vo['id']))}">
+                        <button class="btn btn-xs btn-danger" type="button"><i class="fa fa-trash-o"></i>&nbsp;删除</button>
+                    </a>
+                </td>
+            </tr>
+        {/volist}
+    </tbody>
+
+    </table>
+    </div>
+    </div>
+    </section>
+    </form>
+    </div>
+    </div>
+    </div>
+
+
+{/block}
+
+{block name="js"}
+    <!--dynamic table-->
+    <script type="text/javascript" language="javascript" src="__PUBLIC__/js/advanced-datatable/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/data-tables/DT_bootstrap.js"></script>
+    <!--dynamic table initialization -->
+    <script src="__PUBLIC__/js/dynamic_table_init.js"></script>
+
+    <script type="text/javascript">
+
+        //显示/不显示
+        function show(id,obj){
+            $.ajax({
+                type:'post',
+                url:"{:url('Link/show')}",
+                data:{'id':id},
+                dataType:'json',
+                success:function(data){
+                    if (data.txt == 'show') {
+                        $(obj).children().attr('src','__PUBLIC__/images/ok.png');
+                    } else if(data.txt == 'blank') {
+                        $(obj).children().attr('src','__PUBLIC__/images/cancel.png');
+                    }
+                }
+            })
+        }
+
+    </script>
+{/block}

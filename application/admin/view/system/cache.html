@@ -1,0 +1,61 @@
+{extend name="pub/extend" /}
+
+{block name="title"}
+    <title>系统管理 - 缓存清理</title>
+{/block}
+
+{block name="link"}
+    
+{/block}
+
+{block name="bread"}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{:url('admin/Index/index')}">首页</a>
+        </li>
+        <li class="active">缓存清理</li>
+    </ul>
+{/block}
+
+{block name="content"}
+    <section class="panel">
+        <header class="panel-heading">
+            清理缓存
+            <span class="tools pull-right">
+                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                
+                <a class="fa fa-times" href="javascript:;"></a>
+            </span>
+        </header>
+        <div class="panel-body">
+            <div class="alert alert-warning fade in">
+                <button type="button" class="close close-sm" data-dismiss="alert">
+                    <i class="fa fa-times"></i>
+                </button>
+                <strong>缓存大小:</strong> /model/runtime/ {$size}
+            </div>
+            <div class="progress progress-striped active progress-sm">
+                <div id="clear" style="width: 0%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar" class="progress-bar progress-bar-success">
+                    <span class="sr-only">45% Complete</span>
+                </div>
+            </div>
+            <button class="btn btn-success btn-lg btn-block" type="button" onclick="cle()">清&nbsp;除&nbsp;缓&nbsp;存</button>
+        </div>
+    </section>
+{/block}
+
+{block name="js"}
+    <script type="text/javascript">
+        function cle(){
+            var num = 0;
+            var i = setInterval(function() {
+                num++;
+                $('#clear').css('width',num+'%');
+                if (num >= 100){
+                    window.location.href = "{:url('System/cachedo')}";
+                    clearInterval(i);
+                }
+            }, 10);
+        }
+    </script>
+{/block}

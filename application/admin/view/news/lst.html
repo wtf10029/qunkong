@@ -1,0 +1,145 @@
+{extend name="pub/extend" /}
+
+{block name="title"}
+    <title>文章管理 - 文章列表</title>
+{/block}
+
+{block name="link"}
+    <!--dynamic table-->
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/js/data-tables/DT_bootstrap.css" />
+{/block}
+
+{block name="bread"}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{:url('admin/Index/index')}">首页</a>
+        </li>
+        <li class="active">文章列表</li>
+    </ul>
+{/block}
+
+{block name="content"}
+    <div class="wrapper">
+    <div class="row">
+    <div class="col-sm-12">
+    <form id="form1" name="form1" action="{:url('News/delAll')}" method="post">
+    <section class="panel">
+    <header class="panel-heading">
+        <a href="{:url('News/add')}">
+            <button class="btn btn-sm btn-success" type="button"><i class="fa fa-plus-square"></i>&nbsp;&nbsp;添加</button>
+        </a>
+        <button class="btn btn-sm btn-danger" type="submit">
+            <i class="fa fa-trash-o"></i>&nbsp;&nbsp;删除
+        </button>
+        <span class="tools pull-right">
+            <a href="javascript:;" class="fa fa-chevron-down"></a>
+            <a href="javascript:;" class="fa fa-times"></a>
+         </span>
+    </header>
+    <div class="panel-body">
+    <div class="adv-table">
+    <table  class="display table table-bordered table-striped" id="dynamic-table">
+    <thead>
+    <tr>
+        <th><input id="checkall" type="checkbox"></th>
+        <th>ID</th>
+        <th>标题</th>
+        <th width="30%">描述</th>
+        <th>分类</th>
+        <th>来源</th>
+        <th>发布者</th>
+        <th>浏览数</th>
+        <th>更新时间</th>
+        <th width="70">显示</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+        {volist name="res" id="vo"}
+            <tr>
+                <td>
+                    <input type="checkbox" name="check[]" value="{$vo.id}" />
+                </td>
+                <td>{$vo.id}</td>
+                <td>{$vo.title}</td>
+                <td>
+                    {php}
+                        echo mb_substr($vo['description'],0,20,'utf-8');
+                        if (mb_strlen($vo['description'],'utf-8') > 20) {
+                            echo '...';
+                        }
+                    {/php}
+                </td>
+                <td>{$classify[$vo.classify]}</td>
+                <td>{$vo.source}</td>
+                <td>{$vo.user}</td>
+                <td>{$vo.bro_num}</td>
+                <td>{$vo.createtime|date="Y-m-d H:i",###}</td>
+                <td>
+                    {if condition="$vo['status'] eq 1"}
+                        <a href="javascript:void(0);" onclick="show({$vo.id},this)"><img src="__PUBLIC__/images/ok.png" style="margin-left: 10px;"></a>
+                    {else /}
+                        <a href="javascript:void(0);" onclick="show({$vo.id},this)"><img src="__PUBLIC__/images/cancel.png" style="margin-left: 10px;"></a>
+                    {/if}
+                </td>
+                <td style="text-align:center;">
+                    <a href="{:url('News/edit',array('id'=>$vo['id']))}">
+                        <button class="btn btn-xs btn-info" type="button"><i class="fa fa-pencil"></i>&nbsp;编辑</button>
+                    </a>
+                    <a href="{:url('News/del',array('id'=>$vo['id']))}">
+                        <button class="btn btn-xs btn-danger" type="button"><i class="fa fa-trash-o"></i>&nbsp;删除</button>
+                    </a>
+                </td>
+            </tr>
+        {/volist}
+    </tbody>
+
+    </table>
+    </div>
+    </div>
+    </section>
+    </form>
+    </div>
+    </div>
+    </div>
+
+
+{/block}
+
+{block name="js"}
+    <!--dynamic table-->
+    <script type="text/javascript" language="javascript" src="__PUBLIC__/js/advanced-datatable/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/data-tables/DT_bootstrap.js"></script>
+    <!--dynamic table initialization -->
+    <script src="__PUBLIC__/js/dynamic_table_init.js"></script>
+
+    <script type="text/javascript">
+        //全选/取消全选
+        $("#checkall").click(function(){
+            if(this.checked){
+                $("tbody input[type=checkbox]").prop("checked",true);
+            }else{
+                $("tbody input[type=checkbox]").prop("checked",false);
+            }
+        });
+
+        //显示/不显示
+        function show(id,obj){
+            $.ajax({
+                type:'post',
+                url:"{:url('News/show')}",
+                data:{'id':id},
+                dataType:'json',
+                success:function(data){
+                    if (data.txt == 'show') {
+                        $(obj).children().attr('src','__PUBLIC__/images/ok.png');
+                    } else if(data.txt == 'blank') {
+                        $(obj).children().attr('src','__PUBLIC__/images/cancel.png');
+                    }
+                }
+            })
+        }
+    </script>
+{/block}

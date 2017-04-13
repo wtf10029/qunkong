@@ -1,0 +1,231 @@
+{extend name="layouts/blank" /} {block name="title"}我们的骄傲{/block} {block name="link"} {/block} {block name="content"}
+<div class="n-banner" style="background: url(__PUBLIC__/images/proudbj.jpg);"></div>
+<a name="jyln"></a>
+<div class="swith2">
+    <div class="warpq jiaoao-warp1 w1200" id="jyln">
+        <div class="n-title w1200">
+            <div class="n-type">经营理念</div>
+            <div class="n-type-en"><span>-</span>PHILOSOPHY<span>-</span></div>
+        </div>
+        <div class="w1200" style="overflow: hiiden;">
+            <ul class="jiaoao-linian clear">
+                <li> <span class="num">01</span> <span class="xian">&nbsp;</span>
+                    <p class="title">实力/Power</p>
+                    <a class="imgbigout"> <img class="imgbig" src="__PUBLIC__/images/20160906150627_195.jpg" alt="" width="361" height="201" />                        </a>
+                    <p class="summary">我们是唯一一家核心技术团队源自BAT 有来自百度、阿里、腾讯、360等技术成员组成
+                    </p>
+                </li>
+                <li> <span class="num">02</span> <span class="xian">&nbsp;</span>
+                    <p class="title">灵感/Inspiration</p>
+                    <a class="imgbigout"> <img class="imgbig" src="__PUBLIC__/images/20160906150637_986.jpg" alt="" width="360" height="201" />                        </a>
+                    <p class="summary">每项工作、每个项目都是一个契机，都会推动我们去尝试新的道路，引领我们更上一层楼！这让我们始终保持活力，为我们带来足以令客户骄傲的灵感和创意。</p>
+                </li>
+                <li> <span class="num">03</span> <span class="xian">&nbsp;</span>
+                    <p class="title">信赖/Trust</p>
+                    <a class="imgbigout"> <img class="imgbig" src="__PUBLIC__/images/20160906150646_639.jpg" alt="" width="361" height="201" />                        </a>
+                    <p class="summary">与客户保持友好个人关系是对我们工作莫大的鼓励和认可，我们对待工作精益求精，倾注所有的热情。</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <a name="bgdd"></a>
+    <div class="warpq jiaoao-warp2" id="bgdd">
+        <div class="n-title w1200">
+            <div class="n-type">办公地点</div>
+            <div class="n-type-en"><span>-</span>LOCATION<span>-</span></div>
+        </div>
+        <div class="w100 clear">
+            <div class="jiaoao-local">
+                <img src="__PUBLIC__/images/local1.png" alt="杭州" />
+                <div class="local-hover">
+                    <table border="0">
+                        <tr>
+                            <td>
+                                <p style="font-size:32px;margin-bottom: 15px;text-align:center">杭州</p>
+                                <p style="text-align:center">西子湖畔<br/></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="jiaoao-local">
+                <img src="__PUBLIC__/images/local2.png" alt="杭州" />
+                <div class="local-hover">
+                    <table border="0">
+                        <tr>
+                            <td>
+                                <p style="font-size:32px;margin-bottom: 15px;text-align:center">杭州</p>
+                                <p style="text-align:center">西子湖畔<br/></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="jiaoao-local">
+                <img src="__PUBLIC__/images/local3.png" alt="杭州" />
+                <div class="local-hover">
+                    <table border="0">
+                        <tr>
+                            <td>
+                                <p style="font-size:32px;margin-bottom: 15px;text-align:center">杭州</p>
+                                <p style="text-align:center">西子湖畔<br/></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="jiaoao-local">
+                <img src="__PUBLIC__/images/local4.png" alt="杭州" />
+                <div class="local-hover">
+                    <table border="0">
+                        <tr>
+                            <td>
+                                <p style="font-size:32px;margin-bottom: 15px;text-align:center">杭州</p>
+                                <p style="text-align:center">西子湖畔<br/></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <a name="wjqs"></a>
+    <div class="warpq jiaoao-warp3" id="wjqs">
+        <div class="n-title w1200">
+            <div class="n-type">五件趣事</div>
+            <div class="n-type-en"><span>-</span>AMUSING<span>-</span></div>
+        </div>
+        <div class="w1200">
+            <div class="iwrap1-slideBox">
+                <div class="parHd clear">
+                    <ul>
+                        <li class="on">杭州</li>
+                        <li class="">香港</li>
+                        <li class="">伦敦</li>
+                        <li class="">澳门</li>
+                    </ul>
+                </div>
+                <div class="parBd">
+                    <div class="iwrap1-picScroll iwrap1-picScroll1">
+                        <div class="hd">
+                            <a class="sNext">&gt;</a>
+                            <a class="sPrev">&lt;</a>
+                        </div>
+                        <div class="bd">
+                            <ul class="picList clear">
+                                <li v-for="p in view.history.杭州">
+                                        <img src="__IMAGE__/{{p.thumbnail}}" class="imgbig">
+                                    <div>
+                                        <p>{{p.title}}</p>
+                                        <p>{{p.description}}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="iwrap1-picScroll iwrap1-picScroll2">
+                        <div class="hd">
+                            <a class="sNext">&gt;</a>
+                            <a class="sPrev">&lt;</a>
+                        </div>
+                        <div class="bd">
+                            <ul class="picList">
+                                <li v-for="p in view.history.香港">                   
+                                        <img src="__IMAGE__/{{p.thumbnail}}" class="imgbig">
+                                    <div>
+                                        <p>{{p.title}}</p>
+                                        <p>{{p.description}}</p>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="iwrap1-picScroll iwrap1-picScroll3">
+                        <div class="hd">
+                            <a class="sNext">&gt;</a>
+                            <a class="sPrev">&lt;</a>
+                        </div>
+                        <div class="bd">
+                            <ul class="picList">
+                                <li v-for="p in view.history.伦敦">
+                                        <img src="__IMAGE__/{{p.thumbnail}}" class="imgbig">
+                                    <div>
+                                        <p>{{p.title}}</p>
+                                        <p>{{p.description}}</p>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="iwrap1-picScroll iwrap1-picScroll4">
+                        <div class="hd">
+                            <a class="sNext">&gt;</a>
+                            <a class="sPrev">&lt;</a>
+                        </div>
+                        <div class="bd">
+                            <ul class="picList">
+                                <li v-for="p in view.history.澳门">
+                                        <img src="__IMAGE__/{{p.thumbnail}}" class="imgbig">
+                                    <div>
+                                        <p>{{p.title}}</p>
+                                        <p>{{p.description}}</p>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a name="qkkh"></a>
+    <div class="warpq jiaoao-warp4" id="ldkh">
+        <div class="n-title w1200">
+            <div class="n-type">万控群销客户</div>
+            <div class="n-type-en"><span>-</span>clients<span>-</span></div>
+        </div>
+        <div class="w100" style="height: 180px;background:#efeff1">
+            <div class="w1200 kehu-slide" style="overflow:hidden;padding-top: 65px">
+                <ul class="clients-list">
+                    <li v-for="k in view.client">
+                        <a><img src="__IMAGE__/{{k.url}}" alt="10"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{/block} {block name="js"}
+<script type="text/javascript">
+    var vuedemo = new Vue({
+        el: "#content1",
+        data: {
+            view: {},
+        },
+        ready: function () {
+            $.ajax({
+                url: "{:url('index/Proud/proudLst')}",
+                type: "get",
+                success: function (data) {
+                    data = JSON.parse(data); //将字符串转换成json格式     
+                    vuedemo.view = data;//将数据赋值到view对象
+                    Vue.nextTick(function () {
+                        //我们的骄傲
+                        $(".iwrap1-slideBox").slide({ titCell: ".parHd li", mainCell: ".parBd", triggerTime: 0, effect: "fold", delayTime: "200" })
+                        $(".iwrap1-picScroll").slide({ titCell: ".hd ul", mainCell: ".bd ul", autoPage: true, effect: "leftLoop", easing: "easeInQuint", delayTime: 800, autoPlay: false, scroll: 1, vis: 5, prevCell: ".sPrev", nextCell: ".sNext", switchLoad: "_src" });
+                        $(".kehu-slide").slide({ mainCell: ".clients-list", autoPlay: true, effect: "leftMarquee", vis: 9, interTime: 20, trigger: "click" });
+                    });
+                },
+                error: function (data) {
+                    console.log("error!");
+                }
+            })
+        }
+    })
+
+</script>
+{/block}

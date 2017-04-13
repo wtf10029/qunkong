@@ -1,0 +1,109 @@
+ {extend name="layouts/blank" /} {block name="title"}十年信誉{/block} {block name="content"}
+<div class="history" style="overflow: hidden">
+    <div class="n-title w1200">
+        <div class="n-type" style="color:#fff">十年信誉</div>
+        <div class="n-type-en" style="color:#fff"><span>-</span>HONER<span>-</span></div>
+    </div>
+    <div class="year_list">
+        <div class="history_year">
+            <template v-for="(year,list) in view.history">
+                <a href="#this" class="year">{{year}}</a>
+            </template>
+        </div>
+    </div>
+    <div class="history_cont">
+        <ul class="slide">
+            <li class="year{{i.year}}" v-for="i in view.historys">
+                <div>
+                    <img src="__IMAGE__/{{i.thumbnail}}" alt="万控群销">
+                    <p>{{i.description}}<span>{{i.title}}</span></p>
+                </div>        
+            </li>
+        </ul>
+    </div>
+</div>
+{/block} {block name="js"}
+<script type="text/javascript" src="__PUBLIC__/js/jquery.bxslider.js"></script>
+<script type="text/javascript">
+    function loadJS() {
+        var x2 = -$(".year2004").eq(0).offset().left + 'px';
+        var x3 = -$(".year2007").eq(0).offset().left + 'px';
+        var x4 = -$(".year2010").eq(0).offset().left + 'px';
+        var x5 = -$(".year2013").eq(0).offset().left + 'px';
+        var x6 = -$(".year2014").eq(0).offset().left + 'px';
+        var x7 = -$(".year2015").eq(0).offset().left + 'px';
+        var x8 = -$(".year2016").eq(0).offset().left + 'px';
+        $(".history_year a").click(function () {
+            var s = $(".history_year a").index(this);
+            $('.history_year>a:eq(' + s + ')').addClass('yearactive').siblings().removeClass('yearactive');
+            if (s == 0) {
+                $('.history_cont').animate({ left: 130 }, 500);
+            }
+            else if (s == 1) {
+                $('.history_cont').animate({ left: x1 }, 500);
+            }
+            else if (s == 2) {
+                $('.history_cont').animate({ left: x2 }, 500);
+            }
+            else if (s == 3) {
+                $('.history_cont').animate({ left: x3 }, 500);
+            }
+            else if (s == 4) {
+                $('.history_cont').animate({ left: x4 }, 500);
+            }
+            else if (s == 5) {
+                $('.history_cont').animate({ left: x5 }, 500);
+            }
+            else if (s == 6) {
+                $('.history_cont').animate({ left: x6 }, 500);
+            }
+            else if (s == 7) {
+                $('.history_cont').animate({ left: x7 }, 500);
+            }
+        });
+    }
+    Vue.filter('is_active', function (value) {
+        switch (value) {
+            case 0:
+                value = "yearactive";
+                break;
+            default:
+                value = "";
+                break;
+        }
+        return value;
+    })
+    var vuedemo = new Vue({
+        el: "#content1",
+        data: {
+            view: {},
+        },
+        ready: function () {
+            $.ajax({
+                url: "{:url('index/History/history')}",
+                type: "get",
+                success: function (data) {
+                    data = JSON.parse(data); //将字符串转换成json格式     
+                    vuedemo.view = data;//将数据赋值到view对象
+                    var historys=[];
+                    for(year in  data.history){
+                        for(i in data.history[year]){
+                            data.history[year][i]["year"]=year;
+                            historys.push(data.history[year][i]);
+                        }
+                    }
+                  
+                    vuedemo.view.historys=historys;
+                    Vue.nextTick(function () {
+                        loadJS();
+                    });
+                },
+                error: function (data) {
+                    console.log("error!");
+                }
+            })
+        }
+    })
+
+</script>
+{/block}

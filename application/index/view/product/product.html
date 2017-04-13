@@ -1,0 +1,115 @@
+{extend name="layouts/blank" /} {block name="title"} 群控 -产品 {/block} {block name="link"} {/block} {block name="content"}
+<div class="p-banner" style="background: url(__PUBLIC__/images/productbj.png);"></div>
+<a name="jj"></a>
+<div class="warppro">
+	<div class="w1200" style="overflow: hidden;">
+		<div class="type">手机群控系统/万控群销系统</div>
+		<div class="warppro-content clear">
+			<div class="left ani-view fade-in-left abus">
+				<a href="detail.html?id={{p.id}}"><img src="__IMAGE__/{{view.system.thumbnail}}" class="lazy"></a>
+			</div>
+			<div class="right ani-view fade-in-right pro">
+				<span>{{view.system.title}}</span>
+				<font>{{view.system.tag}}</font>
+
+				<p>{{view.system.description}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+<a name="wxqk"></a>
+<div class="warpprobox">
+	<div class="w1200" style="overflow: hidden;">
+		<div class="type">万控群销</div>
+		<div class="warpprocontent clear">
+			<ul>
+				<li v-for="p in view.product">
+					<a href="detail.html?id={{p.id}}"><img src="__IMAGE__/{{p.thumbnail}}"></a>
+					<div class="right news-li-right">
+						<dl>
+							<dt><a href="detail.html?id={{p.id}}" class="wztitle">{{p.title}}</a></dt>
+							<dd><a href="detail.html?id={{p.id}}">{{p.description}}</a></dd>
+						</dl>
+						<span class="data">{{p.createtime|datatime}}</span>
+						<a href="detail.html?id={{p.id}}" class="readmore">查看详情 &gt;</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<a name="cpgn"></a>
+<div class="warpprofeatures">
+	<div class="warp product-warp2" id="dzyx">
+		<div class="type">产品功能</div>
+		<div class="egame-slide w1200">
+			<a href="javascript:;" class="prev btn">&lt;</a>
+			<a href="javascript:;" class="next btn">&gt;</a>
+			<div class="hd"></div>
+			<div class="bd">
+				<ul class="clear">
+					<li v-for="q in view.func">
+						<a class="imgbigout">
+							<img src="__IMAGE__/{{q.thumbnail}}" class="imgbig">
+						</a>
+						<a>
+							<div class="egame-summary">
+								<p class="title">{{q.title}}</p>
+								<p class="summary">
+									{{q.description}}
+								</p>
+							</div>
+						</a>
+						<div class="egame-slide-xian"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{/block} {block name="js"}
+<script type="text/javascript">
+	//时间过滤器
+	Vue.filter('datatime', function (time) {
+		var time = new Date(parseInt(time) * 1000); //获取一个时间对象  注意：如果是uinx时间戳记得乘于1000。比如php函数time()获得的时间戳就要乘于1000     
+		Y = time.getFullYear() + '-';
+		M = (time.getMonth() + 1 < 10 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1) + '-';
+		D = time.getDate() + ' ';
+		h = (time.getHours() < 10 ? '0' + time.getHours() : time.getHours()) + ':';
+		m = (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes()) + ':';
+		s = (time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds());
+		return Y + M + D;
+	})
+	var vuedemo = new Vue({
+		el: "#content1",
+		data: {
+			view: {},
+		},
+		ready: function () {
+			$.ajax({
+				url: "{:url('index/Product/productLst')}",
+				type: "get",
+				success: function (data) {
+					data = JSON.parse(data); //将字符串转换成json格式     
+					vuedemo.view = data;//将数据赋值到view对象
+					Vue.nextTick(function () {
+						//产品功能
+						$(".egame-slide").slide({
+							titCell: ".hd ul", mainCell: ".bd ul", effect: "leftLoop", delayTime: 800, autoPlay: false, scroll: 1, vis: 4, prevCell: ".prev", nextCell: ".next", switchLoad: "_src"
+						});
+						$(".egame-slide ul li").hover(function () {
+							$(this).children(".egame-slide-xian").stop().animate({ width: "100%" }, 500);
+						}, function () {
+							$(this).children(".egame-slide-xian").stop().animate({ width: "0px" }, 500);
+						});
+					});
+				},
+				error: function (data) {
+					console.log("error!");
+				}
+			})
+		}
+	})
+
+</script>
+{/block}

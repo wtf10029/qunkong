@@ -1,0 +1,117 @@
+{extend name="pub/extend" /}
+
+{block name="title"}
+<title>留言板 - 留言板列表</title>
+{/block}
+
+{block name="link"}
+<!--dynamic table-->
+<link href="__PUBLIC__/js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
+<link href="__PUBLIC__/js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
+<link rel="stylesheet" href="__PUBLIC__/js/data-tables/DT_bootstrap.css" />
+{/block}
+
+{block name="bread"}
+<ul class="breadcrumb">
+    <li>
+        <a href="{:url('admin/Index/index')}">首页</a>
+    </li>
+    <li class="active">留言板列表</li>
+</ul>
+{/block}
+
+{block name="content"}
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <form id="form1" name="form1" action="{:url('News/delAll')}" method="post">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <span>留言板列表</span>
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                        </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="adv-table">
+                            <table  class="display table table-bordered table-striped" id="dynamic-table">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>姓名</th>
+                                    <th>电话</th>
+                                    <th>邮箱</th>
+                                    <th>内容</th>
+                                    <th>创建时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {volist name="message" id="vo"}
+                                        <tr>
+                                            <td>{$vo.id}</td>
+                                            <td>{$vo.name}</td>
+                                            <td>{$vo.tel}</td>
+                                            <td>{$vo.email}</td>
+                                            <td style="text-align:center;">
+                                                <a id="{$vo.id}" onclick="m_del({$vo.id})" class="btn btn-xs btn-warning" href="#myModal2" data-toggle="modal"> 点击查看</a>
+                                            </td>
+                                            <td>{$vo.create_time}</td>
+                                        </tr>
+                                    {/volist}
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="panel-body">
+    <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal2" class="modal fade" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                    <h4 class="modal-title">留言内容</h4>
+                </div>
+                <div class="modal-body" id="con">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
+</div>
+
+
+{/block}
+
+{block name="js"}
+<!--dynamic table-->
+<script type="text/javascript" language="javascript" src="__PUBLIC__/js/advanced-datatable/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/data-tables/DT_bootstrap.js"></script>
+<!--dynamic table initialization -->
+<script src="__PUBLIC__/js/dynamic_table_init.js"></script>
+
+<script type="text/javascript">
+    function m_del(id){
+        $.ajax({
+            type:'post',
+            url:"{:url('Message/getCon')}",
+            data:{'id':id},
+            dataType:'json',
+            success:function(data){
+                $('#con').html(data.txt);
+            }
+        })
+    }
+</script>
+{/block}

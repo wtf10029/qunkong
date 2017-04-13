@@ -1,0 +1,80 @@
+{extend name="pub/extend" /}
+
+{block name="title"}
+<title>价格管理</title>
+{/block}
+
+{block name="link"}
+
+{/block}
+
+{block name="bread"}
+<ul class="breadcrumb">
+    <li>
+        <a href="{:url('admin/Index/index')}">首页</a>
+    </li>
+    <li class="active">价格管理</li>
+</ul>
+{/block}
+
+{block name="content"}
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    价格管理
+                </header>
+                <div class="panel-body">
+                    <div class=" form">
+                        <form class="cmxform form-horizontal adminex-form" id="commentForm" method="post" action="{:url('Price/price')}" enctype="multipart/form-data">
+                            <div class="form-group ">
+                                <label for="standard" class="control-label col-lg-2">标准版&nbsp;<span style="color:red;">(必填*)</span></label>
+                                <div class="col-lg-10">
+                                    <input class=" form-control" id="standard" name="standard" value="{$price.standard}" type="text" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="high_with" class="control-label col-lg-2">高配版&nbsp;<span style="color:red;">(必填*)</span></label>
+                                <div class="col-lg-10">
+                                    <input class=" form-control" id="high_with" name="high_with" value="{$price.high_with}" type="text" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="pro" class="control-label col-lg-2">专业版&nbsp;<span style="color:red;">(必填*)</span></label>
+                                <div class="col-lg-10">
+                                    <input class=" form-control" id="pro" name="pro" value="{$price.pro}" type="text" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="vip" class="control-label col-lg-2">尊享版&nbsp;<span style="color:red;">(必填*)</span></label>
+                                <div class="col-lg-10">
+                                    <input class=" form-control" id="vip" name="vip" value="{$price.vip}" type="text" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button class="btn btn-primary" type="submit">保存信息</button>
+                                    <button class="btn btn-default" type="reset">重新填写</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+{/block}
+
+{block name="js"}
+
+{/block}

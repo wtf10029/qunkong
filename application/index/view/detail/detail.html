@@ -1,0 +1,65 @@
+{extend name="layouts/blank" /} {block name="title"}详情页{/block} {block name="link"} {/block}{block name="content"}
+
+<div class="n-banner" style="background: url(__PUBLIC__/images/detailbj.jpg);"></div>
+<div class="warp1">
+    <div class="w1200 detail" style="overflow: hidden;">
+        <div class="detail-title">{{view.detail.title}}</div>
+        <div class="detail-type-en"><span>-</span>{{view.detail.createtime|datatime}}<span>-</span></div>
+    </div>
+    <div class="detailbox" v-html="view.detail.content">
+       
+    </div>
+    <div class="nextprev">
+        <div class="next left">
+            <a href="detail.html?id={{view.upDown.next.id}}"><span>上一篇:</span>家居生活迈向智能化是必然趋势</a>
+        </div>
+        <div class="prev right">
+            <a href="detail.html?id={{view.upDown.prev.id}}"><span>下一篇:</span>智能家居在建设智慧城市中的应用</a>
+        </div>
+    </div>
+</div>
+{/block} {block name="js"}
+<script type="text/javascript">
+    //时间过滤器
+    Vue.filter('datatime', function (time) {
+        var time = new Date(parseInt(time) * 1000); //获取一个时间对象  注意：如果是uinx时间戳记得乘于1000。比如php函数time()获得的时间戳就要乘于1000     
+        Y = time.getFullYear() + '-';
+        M = (time.getMonth() + 1 < 10 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1) + '-';
+        D = time.getDate() + ' ';
+        h = (time.getHours() < 10 ? '0' + time.getHours() : time.getHours()) + ':';
+        m = (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes()) + ':';
+        s = (time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds());
+        return Y + M + D;
+    })
+    var vuedemo = new Vue({
+        el: "#content1",
+        data: {
+            view: {},
+        },
+        ready: function () {
+            $.ajax({
+                url: "{:url('index/Detail/detailLst')}",
+                type: "post",
+                data: {
+                    id: GetQueryString("id"),
+                },
+                success: function (data) {
+                    data = JSON.parse(data); //将字符串转换成json格式     
+                    vuedemo.view = data;//将数据赋值到view对象
+                },
+                error: function (data) {
+                    console.log("error!");
+                }
+            })
+        }
+    })
+
+    // js获取url的参数
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+
+</script>
+{/block}

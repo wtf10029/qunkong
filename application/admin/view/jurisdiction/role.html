@@ -1,0 +1,81 @@
+{extend name="pub/extend" /}
+
+{block name="title"}
+    <title>权限管理 - 角色列表</title>
+{/block}
+
+{block name="link"}
+    <!--dynamic table-->
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/js/data-tables/DT_bootstrap.css" />
+{/block}
+
+{block name="bread"}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{:url('admin/Index/index')}">首页</a>
+        </li>
+        <li class="active">角色管理</li>
+    </ul>
+{/block}
+
+{block name="content"}
+    <div class="wrapper">
+    <div class="row">
+    <div class="col-sm-12">
+    <section class="panel">
+    <header class="panel-heading">
+        后台用户列表
+        <span class="tools pull-right">
+            <a href="javascript:;" class="fa fa-chevron-down"></a>
+            <a href="javascript:;" class="fa fa-times"></a>
+         </span>
+    </header>
+    <div class="panel-body">
+    <div class="adv-table">
+    <table  class="display table table-bordered table-striped" id="dynamic-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>用户名</th>
+        <th>邮箱</th>
+        <th>登录ip</th>
+        <th>登录时间</th>
+        <th>角色</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+        {volist name="res" id="vo"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.userid}</td>
+                <td>{$vo.email}</td>
+                <td>{$vo.loginip}</td>
+                <td>{$vo.logintime|date="Y-m-d H:i",###}</td>
+                <td>{$ro[$ar[$vo.id]]}</td>
+                <td style="text-align:center;">
+                    <a href="{:url('Jurisdiction/editrole',array('id'=>$vo['id']))}"><button class="btn btn-xs btn-info" type="button"><i class="fa fa-pencil-square-o"></i>&nbsp;修改角色</button></a>
+                </td>
+            </tr>
+        {/volist}
+    </tbody>
+
+    </table>
+    </div>
+    </div>
+    </section>
+    </div>
+    </div>
+    </div>
+
+{/block}
+
+{block name="js"}
+    <!--dynamic table-->
+    <script type="text/javascript" language="javascript" src="__PUBLIC__/js/advanced-datatable/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/data-tables/DT_bootstrap.js"></script>
+    <!--dynamic table initialization -->
+    <script src="__PUBLIC__/js/dynamic_table_init.js"></script>
+{/block}

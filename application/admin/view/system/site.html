@@ -1,0 +1,138 @@
+{extend name="pub/extend" /}
+
+{block name="title"}
+    <title>系统管理 - 站点管理</title>
+{/block}
+
+{block name="link"}
+    <!--dynamic table-->
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/js/data-tables/DT_bootstrap.css" />
+{/block}
+
+{block name="bread"}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{:url('admin/Index/index')}">首页</a>
+        </li>
+        <li class="active">站点管理</li>
+    </ul>
+{/block}
+
+{block name="content"}
+    <!--body wrapper start-->
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        站点管理
+                    </header>
+                    <div class="panel-body">
+                        <div class=" form">
+                            <form class="cmxform form-horizontal adminex-form" id="commentForm" method="post" action="{:url('System/site')}">
+                                <div class="form-group ">
+                                    <label for="domain" class="control-label col-lg-2">网站域名</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control" id="domain" name="domain" type="text" value="{$site.domain|default='http://127.0.0.1'}" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="site_name" class="control-label col-lg-2">网站名称</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control" id="site_name" name="site_name" type="text" value="{$site.site_name|default=''}" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="seo_title" class="control-label col-lg-2">seo标题</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control" id="seo_title" name="seo_title" type="text" value="{$site.seo_title|default=''}" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="seo_keywords" class="control-label col-lg-2">seo关键词</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control" id="seo_keywords" name="seo_keywords" type="text" value="{$site.seo_keywords|default=''}" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">seo描述</label>
+                                    <div class="col-sm-10">
+                                        <textarea rows="6" class="form-control" name="seo_description">{$site.seo_description|default=''}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="icp_certificate" class="control-label col-lg-2">ICP证书号</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control" id="icp_certificate" name="icp_certificate" type="text" value="{$site.icp_certificate|default=''}" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="qq" class="control-label col-lg-2">QQ</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control" id="qq" name="qq" type="text" value="{$site.qq|default=''}" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="tel" class="control-label col-lg-2">电话(固定)</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control" id="tel" name="tel" type="text" value="{$site.tel|default=''}" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="complaint" class="control-label col-lg-2">投诉热线</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control" id="complaint" name="complaint" type="text" value="{$site.complaint|default=''}" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="phone" class="control-label col-lg-2">电话(移动)</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control" id="phone" name="phone" type="text" value="{$site.phone|default=''}" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="email" class="control-label col-lg-2">邮箱(网站底部显示)</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control" id="email" name="email" type="text" value="{$site.email|default=''}" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="address" class="control-label col-lg-2">地址(网站底部显示)</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control" id="address" name="address" type="text" value="{$site.address|default=''}" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">统计代码</label>
+                                    <div class="col-sm-10">
+                                        <textarea rows="6" class="form-control" name="code">{$site.code|default=''}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button class="btn btn-primary" type="submit">添加</button>
+                                        <button class="btn btn-default" type="reset">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+{/block}
+
+{block name="js"}
+    <!--dynamic table-->
+    <script type="text/javascript" language="javascript" src="__PUBLIC__/js/advanced-datatable/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/data-tables/DT_bootstrap.js"></script>
+    <!--dynamic table initialization -->
+    <!-- <script src="__PUBLIC__/js/dynamic_table_init.js"></script> -->
+
+{/block}

@@ -1,0 +1,141 @@
+{extend name="pub/extend" /}
+
+{block name="title"}
+    <title>回收站 - 轮播列表</title>
+{/block}
+
+{block name="link"}
+    <!--dynamic table-->
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/js/data-tables/DT_bootstrap.css" />
+{/block}
+
+{block name="bread"}
+    <ul class="breadcrumb">
+        <li>
+            <a href="#">首页</a>
+        </li>
+        <li class="active">轮播列表</li>
+    </ul>
+{/block}
+
+{block name="content"}
+    <div class="wrapper">
+    <div class="row">
+    <div class="col-sm-12">
+    <section class="panel">
+    <header class="panel-heading">
+        轮播列表
+        <span class="tools pull-right">
+            <a href="javascript:;" class="fa fa-chevron-down"></a>
+            <a href="javascript:;" class="fa fa-times"></a>
+        </span>
+    </header>
+    <div class="panel-body">
+    <div class="adv-table">
+    <table  class="display table table-bordered table-striped" id="dynamic-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>标题</th>
+        <th>描述</th>
+        <th>分类</th>
+        <th>排序</th>
+        <th>发布者</th>
+        <th>更新时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+        {volist name="res" id="vo"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.title}</td>
+                <td>{$vo.description}</td>
+                <td>{$classify[$vo.classify]}</td>
+                <td>{$vo.rank}</td>
+                <td>{$vo.user}</td>
+                <td>{$vo.createtime|date="Y-m-d H:i",###}</td>
+                <td style="text-align:center;">
+                    <a href="{:url('Recycle/recoverBanner',array('id'=>$vo['id']))}">
+                        <button class="btn btn-xs btn-info" type="button"><i class="fa fa-mail-reply-all"></i>&nbsp;恢复用户</button>
+                    </a>
+                    <a id="{$vo.id}" href="#myModal2" data-toggle="modal" onclick="m_del({$vo.id},this)">
+                        <button class="btn btn-xs btn-danger" type="button"><i class="fa fa-bolt"></i>&nbsp;彻底删除</button>
+                    </a>
+                    
+                </td>
+            </tr>
+        {/volist}
+
+    </tbody>
+
+    </table>
+    </div>
+    </div>
+    </section>
+    </div>
+    </div>
+    </div>
+    
+    <div class="panel-body">
+        <!-- Modal -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal2" class="modal fade" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 class="modal-title">彻底删除</h4>
+                    </div>
+                    <div class="modal-body">
+                        您确定要彻底删除吗？彻底删除后将不能恢复！
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="b_del()">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal -->
+    </div>
+
+{/block}
+
+{block name="js"}
+    <!--dynamic table-->
+    <script type="text/javascript" language="javascript" src="__PUBLIC__/js/advanced-datatable/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/data-tables/DT_bootstrap.js"></script>
+    <!--dynamic table initialization -->
+    <script src="__PUBLIC__/js/dynamic_table_init.js"></script>
+    <!--gritter script-->
+    <script type="text/javascript" src="__PUBLIC__/js/gritter/js/jquery.gritter.js"></script>
+    <script src="__PUBLIC__/js/gritter/js/gritter-init.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function m_del(id,obj){
+            uid = id;
+            obje = obj;
+        }
+
+        function b_del(){
+            $.ajax({
+                type:'post',
+                url:"{:url('Recycle/delBanner')}",
+                data:{'id':uid},
+                dataType:'json',
+                success:function(data){
+                    if (data.txt == 'success') {
+                        $(obje).parent().parent().remove();
+                    }
+
+                    if (data.txt == 'error') {
+                        alert('网络原因,删除失败!');
+                    }
+                }
+            })
+        }
+    </script>
+
+{/block}

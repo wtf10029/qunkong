@@ -1,0 +1,77 @@
+{extend name="pub/extend" /}
+
+{block name="title"}
+    <title>栏目管理 - 栏目列表</title>
+{/block}
+
+{block name="link"}
+    
+{/block}
+
+{block name="bread"}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{:url('admin/Index/index')}">首页</a>
+        </li>
+        <li class="active">栏目列表</li>
+    </ul>
+{/block}
+
+{block name="content"}
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <a href="{:url('Category/add')}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> 添加栏目</a>
+                    <span class="tools pull-right">
+                        <a href="javascript:;" class="fa fa-chevron-down"></a>
+                        <a href="javascript:;" class="fa fa-times"></a>
+                     </span>
+                </header>
+                <form action="{:url('Category/add')}" method="post">
+                    <div class="panel-body">
+                        <section id="unseen">
+                            <table class="table table-bordered table-striped table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th class="numeric text-center" width="10%">ID</th>
+                                        <th class="numeric text-center">栏目名称</th>
+                                        <th class="numeric text-center">栏目类型</th>
+                                        <th class="numeric text-center" width="20%">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {volist name="cate" id="vo"}
+                                    <tr>
+                                        <td align="center">{$vo.id}</td>
+                                        <td>
+                                            {if condition="$vo.level neq 0"}|{/if}
+                                            <?php echo str_repeat('----',$vo['level'])?>
+                                            {$vo.catename}
+                                        </td>
+                                        <td align="center">
+                                            {if condition="$vo.type eq 1"}
+                                            列表栏目
+                                            {else /}
+                                            单页栏目
+                                            {/if}
+                                        </td>
+                                        <td align="center">
+                                            <a href="{:url('Category/edit',array('id' => $vo['id']))}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> 编辑</a>
+                                            <a href="{:url('Category/del',array('id' => $vo['id']))}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> 删除</a>
+                                        </td>
+                                    </tr>
+                                    {/volist}
+                                </tbody>
+                            </table>
+                        </section>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+{/block}
+
+{block name="js"}
+    
+{/block}

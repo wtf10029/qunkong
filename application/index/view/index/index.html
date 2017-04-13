@@ -1,0 +1,434 @@
+{extend name="layouts/blank" /} {block name="title"} 万控群销 -首页 {/block} {block name="link"} {/block} {block name="content"}
+<div class="h-banner">
+    <div class="bd">
+        <ul>
+            <li data-load="no" v-for="b in view.banner">
+                <img src="__IMAGE__/{{b.path}}">
+            </li>
+        </ul>
+    </div>
+    <div class="hd">
+        <ul>
+            <li></li>
+        </ul>
+    </div>
+    <a href="javascript:;" class="prev btn"></a>
+    <a href="javascript:;" class="next btn"></a>
+</div>
+<div class="warp1">
+    <div class="w1200" style="overflow: hidden;">
+        <div class="type">手机群控系统/万控群销系统</div>
+        <div class="warp1-content clear">
+            <div class="left ani-view fade-in-left">
+                <a href="/honor"><img src="__PUBLIC__/images/blank.gif" class="lazy" data-original="__PUBLIC__/images/indexHonor.jpg"></a>
+            </div>
+            <div class="right ani-view fade-in-right">
+                <p id="p1">是一款集软件、硬件为一体的微信营销业务拓展系统，它能帮助我们各大中小企业、实体店家、网商从业者运用移动互联网微信大平台进行业务拓展。</p>
+                <p id="p2">
+                    我们的口号是，要客户找微客！！直接把你的广告推到用户眼皮底下！适用行业：金融、房产、医疗、保险、教育、美容、实体制造业、微商等，让企业经营者不在为客源而烦恼！ 批量发朋友圈，批量聊天，批量导入通讯录，批量自动化加好友、打招呼等，大大降低了人力成本，提供工作效率，辐射面更广！万控群销行业领先的技术，卓越的性能，超强的用户体验，让各企业商家不再有后顾之忧，让你客户源源不断接不停！
+                </p>
+                <a href="proud.html" class="more">MORE <span>></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="warp2">
+    <div class="w1200 index-type">
+        <div class="type">产品介绍</div>
+        <div class="type-en"><span>-</span>PRODUCT<span>-</span></div>
+    </div>
+    <div class="w1200 product-slide">
+        <div class="bd">
+            <ul>
+                <li class="ani-view fade-in-down" v-for="p in view.product">
+                    <a href="/product" class="imgbigout">
+                        <img src="__IMAGE__/{{p.thumbnail}}" class="imgbig">
+                        <p class="product-bg transition"></p>
+                    </a>
+                    <a href="/product" class="title">{{p.title}}</a>
+                    <a href="/product" class="description">{{p.description}}</a>
+                    <span><a href="/product">更多></a></span>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="hd">
+
+        </div>
+
+        <a href="javascript:;" class="prev btn"></a>
+
+        <a href="javascript:;" class="next btn"></a>
+
+    </div>
+</div>
+<div class="warpvideo">
+    <div class="w1200 index-type">
+        <div class="type">视频简介</div>
+        <div class="type-en"><span>-</span>FUNCTION<span>-</span></div>
+    </div>
+    <div class="w1200 video-slide">
+        <div class="bd">
+           <embed src='__PUBLIC__/video/movice.swf' allowFullScreen='true' quality='high' width='1160' height='610' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>
+        </div>
+    </div>
+</div>
+<div class="warpadvantage">
+    <div class="w1200 index-type">
+        <div class="type">我们的优势</div>
+        <div class="type-en"><span>-</span>ADVANTAGE<span>-</span></div>
+    </div>
+    <div class="w1200 advantage-slide">
+        <div class="bd">
+            <ul>
+                <li>
+                    <div class="advantageimg1"></div>
+                    <font>万控群销</font>
+                    <span>
+							最多支持一台电脑控制管理127部手机，电脑
+							画面和手机屏幕实时同步操作
+						</span>
+                </li>
+                <li>
+                    <div class="advantageimg2"></div>
+                    <font>自动营销</font>
+                    <span>
+							电脑一键实现多部手机自动加粉、自动扫街自动发朋友圈等常用微营销功能
+						</span>
+                </li>
+                <li>
+                    <div class="advantageimg3"></div>
+                    <font>集中对话</font>
+                    <span>
+							将所有手机对话集中到一个窗口，像聊QQ一样在电脑端直接和好友进行实时对话
+						</span>
+                </li>
+                <li>
+                    <div class="advantageimg4"></div>
+                    <font>智能模拟</font>
+                    <span>
+							完全模拟模拟人工操作，避免造成微信封号的风险.让营销更加安全稳定
+						</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="warpfeatures">
+    <div class="w1200 index-type">
+        <div class="type">万控群销功能</div>
+        <div class="type-en">万控群销群控23大功能，未来各行业的标配,你值得拥有</div>
+    </div>
+    <div class="w1200 features-slide">
+        <div class="bd">
+            <div class="features1">
+                <ul>
+                    <li>
+                        <em></em>
+                        <font>一键全自动添加附近的人</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>按号段或区域生成手机号码</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>一键发送通讯录好友</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>聊天机器人，自动回复新消息</font>
+                    </li>
+                </ul>
+            </div>
+            <div class="features2">
+                <ul>
+                    <li>
+                        <em></em>
+                        <font>一键站街，自动切换位置</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>一键添加指定号码</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>一键发送所有群聊消息</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>微信客服系统，云聊天系统</font>
+                    </li>
+                </ul>
+            </div>
+            <div class="features3">
+                <ul>
+                    <li>
+                        <em></em>
+                        <font>自动导入手机通讯录</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>自动扔瓶子，捡瓶子</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>一键分享链接到朋友圈</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>定时开启任务</font>
+                    </li>
+                </ul>
+            </div>
+            <div class="features4">
+                <ul>
+                    <li>
+                        <em></em>
+                        <font>自动切换微信账号</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>一键添加群成员</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>一键发送朋友圈</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>强大的任务管理功能</font>
+                    </li>
+                </ul>
+            </div>
+            <div class="features5">
+                <ul>
+                    <li>
+                        <em></em>
+                        <font>自动添加手机联系人</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>同屏操作，按组操作</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>一键点赞，一键评论</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>批量手机屏幕实时传输电脑</font>
+                    </li>
+                </ul>
+            </div>
+            <div class="features6">
+                <ul>
+                    <li>
+                        <em></em>
+                        <font>自动通过新朋友验证</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>分组手机控制</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>一键自动修改微信资料</font>
+                    </li>
+                    <li>
+                        <em></em>
+                        <font>后续新功能软件使用期内免费升级</font>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="warp3">
+
+    <div class="w1200 index-type">
+
+        <div class="type">客户案例</div>
+
+        <div class="type-en"><span>-</span>CASE<span>-</span></div>
+
+    </div>
+
+    <div class="w1200 news-slide">
+
+        <div class="bd">
+
+            <ul>
+                <li class="ani-view fade-in-down" v-for="c in view.cases">
+                    <a href="cases.html" class="imgbigout">
+                        <img src="__IMAGE__/{{c.thumbnail}}" class="imgbig">
+                    </a>
+                    <div class="news-title">
+                        <p><a href="cases.html">{{c.description}}</a></p>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="hd"></div>
+
+        <a href="javascript:;" class="prev btn">&lt;</a>
+
+        <a href="javascript:;" class="next btn">&gt;</a>
+
+    </div>
+
+    <a class="readmore" href="cases.html" target="_blank">探索更多</a>
+
+</div>
+<div class="warp4">
+
+    <div class="w1200 index-type">
+
+        <div class="type">品质服务</div>
+
+        <div class="type-en"><span>-</span> QUALITY & SERVICE <span>-</span></div>
+
+    </div>
+
+    <div class="w1200" style="margin-top:100px">
+
+        <table>
+
+            <tr>
+
+                <td class="ani-view fade-in-left">
+
+                    <p><img src="__PUBLIC__/images/warp4-1.png"></p>
+
+                    <p>十年沉淀万控群销影响行业的力量</p>
+
+                </td>
+
+                <td class="ani-view fade-in-down">
+
+                    <p><img src="__PUBLIC__/images/warp4-2.png"></p>
+
+                    <p>唯一具备信任凭证 自由 安全 无忧</p>
+
+                </td>
+
+                <td class="ani-view fade-in-right">
+
+                    <p><img src="__PUBLIC__/images/warp4-3.png"></p>
+
+                    <p>提供全方位微信营销服务</p>
+
+                </td>
+            </tr>
+
+        </table>
+
+        <p style="text-align: center;margin-top:45px">万控群销系统是一款集软件、硬件为一体的微信营销业务拓展系统，它能帮助我们各大中小企业、
+            <br> 实体店家、卖家、网商从业者，运用移动互联网微信大平台进行业务拓展。产品核心就是运用一台电脑控制百部手机微信，
+
+            <br> 自动化，智能化，标准化，集中化。大大降低了人力成本，提供工作效率，辐射面更广。万控群销行业领先的技术，
+
+            <br> 卓越的性能，超强的用户体验，让各企业商家不再有后顾之忧，让您客户源源不断。
+
+            <br><br> —
+        </p>
+
+        <a href="service.html" target="_blank" class="readmore">探索更多</a>
+
+    </div>
+
+</div>
+<div class="warpnews">
+
+    <div class="w1200 index-type">
+
+        <div class="type"><span>-</span>微客学院<span>-</span></div>
+
+        <div class="type-en">NEWSLETTER</div>
+
+    </div>
+
+    <div class="w1200" style="margin-top:100px">
+        <ul class="indexnews">
+            <li v-for="n in view.news">
+                <a href="detail.html?id={{n.id}}">
+                    <font>{{n.title}}</font>
+                    <span>{{n.createtime|datatime}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+{/block} {block name="js"}
+<script type="text/javascript">
+    //时间过滤器
+    Vue.filter('datatime', function (time) {
+        var time = new Date(parseInt(time) * 1000); //获取一个时间对象  注意：如果是uinx时间戳记得乘于1000。比如php函数time()获得的时间戳就要乘于1000     
+        Y = time.getFullYear() + '-';
+        M = (time.getMonth() + 1 < 10 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1) + '-';
+        D = time.getDate() + ' ';
+        h = (time.getHours() < 10 ? '0' + time.getHours() : time.getHours()) + ':';
+        m = (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes()) + ':';
+        s = (time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds());
+        return Y + M + D;
+    })
+    var vuedemo = new Vue({
+        el: "#content1",
+        data: {
+            view: {},
+        },
+        ready: function () {
+            $.ajax({
+                url: "{:url('index/Index/ajaxIndex')}",
+                type: "get",
+                success: function (data) {
+                    data = JSON.parse(data); //将字符串转换成json格式     
+                    vuedemo.view = data;//将数据赋值到view对象
+                    Vue.nextTick(function () {
+                        $(".kehu-slide").slide({ mainCell: ".clients-list", autoPlay: true, effect: "leftMarquee", vis: 9, interTime: 20, trigger: "click" });
+                        //bannner
+                        $(".h-banner").slide({
+                            effect: "fold", titCell: ".hd ul", mainCell: ".bd ul", autoPlay: true, autoPage: true, interTime: 8000, mouseOverStop: false,
+                            startFun: function (i, c) {
+                                var now = $(".h-banner .bd li").eq(i);
+                                if (now.attr("data-load") == "no") {
+                                    now.css("backgroundImage", "url(" + now.attr("data-bg") + ")");
+                                    now.attr("data-load", "yes");
+                                }
+                            },
+                            endFun: function (i, c) {
+                                var now = $(".h-banner .bd li").eq(i + 1);
+                                if (now.attr("data-load") == "no") {
+                                    setTimeout(function () {
+                                        now.attr("data-load", "yes");
+                                        now.css("backgroundImage", "url(" + now.attr("data-bg") + ")");
+                                    }, 3000);
+                                }
+                            }
+                        });
+                        //产品滚动
+                        $(".product-slide").slide({ titCell: ".hd ul", mainCell: ".bd ul", effect: "leftLoop", delayTime: 800, autoPlay: false, scroll: 1, vis: 4, prevCell: ".prev", nextCell: ".next", switchLoad: "_src" });
+                        $(".product-slide .bd li").hover(function () {
+                            $(this).children().children(".product-bg").css("opacity", "0");
+                            $(this).children().children("img").css("transform", "scale(1.1)");
+                        }, function () {
+                            $(this).children().children(".product-bg").css("opacity", "1");
+                            $(this).children().children("img").css("transform", "scale(1)");
+                        });
+                        //新闻滚动
+                        $(".news-slide").slide({ titCell: ".hd ul", mainCell: ".bd ul", effect: "leftLoop", delayTime: 800, autoPlay: false, scroll: 1, vis: 3, prevCell: ".prev", nextCell: ".next", switchLoad: "_src" });
+
+                    });
+                },
+                error: function (data) {
+                    console.log("error!");
+                }
+            })
+        }
+    })
+</script>
+{/block}

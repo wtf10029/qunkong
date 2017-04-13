@@ -1,0 +1,147 @@
+{extend name="pub/extend" /}
+
+{block name="title"}
+    <title>轮播图 - 添加轮播</title>
+{/block}
+
+{block name="link"}
+    <!--dynamic table-->
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
+    <link href="__PUBLIC__/js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/js/data-tables/DT_bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/my.css" />
+
+    <!--multi-select-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/js/jquery-multi-select/css/multi-select.css" />
+
+    <!--file upload-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/bootstrap-fileupload.min.css" />
+
+    <!--tags input-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/js/jquery-tags-input/jquery.tagsinput.css" />
+{/block}
+
+{block name="bread"}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{:url('admin/Index/index')}">首页</a>
+        </li>
+        <li class="active">添加轮播</li>
+    </ul>
+{/block}
+
+{block name="content"}
+    <!--body wrapper start-->
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        添加轮播
+                    </header>
+                    <div class="panel-body">
+                        <div class=" form">
+                            <form class="cmxform form-horizontal adminex-form" id="commentForm" method="post" action="{:url('Banner/add')}" enctype="multipart/form-data">
+                                <div class="form-group ">
+                                    <label for="title" class="control-label col-lg-2">轮播标题&nbsp;(必填*)</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control" id="title" name="title" minlength="2" type="text" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">轮播分类&nbsp;(必填*)</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control m-bot15" name="classify">
+                                            {volist name="classify" id="vo"}
+                                                <option value="{$vo.id}">{$vo.catename}</option>
+                                            {/volist}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="link" class="control-label col-lg-2">轮播链接&nbsp;(选填,url需要带http://)</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control " id="link" type="text" name="link"  />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="rank" class="control-label col-lg-2">排序&nbsp;(值越大，越靠前,当前最大{$maxRank|default="0"})</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control " id="rank" type="text" name="rank"  />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">轮播描述</label>
+                                    <div class="col-sm-10">
+                                        <textarea rows="6" name="description" class="form-control" placeholder="请输入30字以内的轮播描述..." maxlength="30"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group last">
+                                    <label class="control-label col-md-3">轮播图</label>
+                                    <div class="col-md-9">
+                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="">
+                                            </div>
+                                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                            <div>
+                                                   <span class="btn btn-default btn-file">
+                                                   <span class="fileupload-new"><i class="fa fa-paper-clip"></i>图片添加</span>
+                                                   <span class="fileupload-exists"><i class="fa fa-undo"></i> 修改</span>
+                                                   <input type="file" name="image" class="default">
+                                                   </span>
+                                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i>移除</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button class="btn btn-primary" type="submit">添加轮播</button>
+                                        <button class="btn btn-default" type="reset">重新填写</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+{/block}
+
+{block name="js"}
+    <!--dynamic table-->
+    <script type="text/javascript" language="javascript" src="__PUBLIC__/js/advanced-datatable/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/data-tables/DT_bootstrap.js"></script>
+    <!--dynamic table initialization -->
+    <script src="__PUBLIC__/js/dynamic_table_init.js"></script>
+
+    <!-- uaditor -->
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__/uaditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__/uaditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__/uaditor/lang/zh-cn/zh-cn.js"></script>
+
+    <!--icheck -->
+    <script src="__PUBLIC__/js/iCheck/jquery.icheck.js"></script>
+    <script src="__PUBLIC__/js/icheck-init.js"></script>
+    <!--multi-select-->
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-multi-select/js/jquery.multi-select.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+    <script src="__PUBLIC__/js/multi-select-init.js"></script>
+    <!--spinner-->
+    <script type="text/javascript" src="__PUBLIC__/js/fuelux/js/spinner.min.js"></script>
+    <script src="__PUBLIC__/js/spinner-init.js"></script>
+    <!--file upload-->
+    <script type="text/javascript" src="__PUBLIC__/js/bootstrap-fileupload.min.js"></script>
+    <!--tags input-->
+    <script src="__PUBLIC__/js/jquery-tags-input/jquery.tagsinput.js"></script>
+    <script src="__PUBLIC__/js/tagsinput-init.js"></script>
+    <!--bootstrap input mask-->
+    <script type="text/javascript" src="__PUBLIC__/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+{/block}
